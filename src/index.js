@@ -21,3 +21,36 @@ export const school = {
     7: new Student('Ivan', [76, 89, 78, 98, 98, 99, 89, 96]),
   },
 };
+
+Object.defineProperty(school, 'aGradeStudents', {
+  get() {
+    return getFilteredStudents(Object.values(this.students), 90, 100);
+  },
+});
+
+Object.defineProperty(school, 'bGradeStudents', {
+  get() {
+    return getFilteredStudents(Object.values(this.students), 75, 89);
+  },
+});
+
+Object.defineProperty(school, 'cGradeStudents', {
+  get() {
+    return getFilteredStudents(Object.values(this.students), 60, 74);
+  },
+});
+
+Object.defineProperty(school, 'dGradeStudents', {
+  get() {
+    return getFilteredStudents(Object.values(this.students), 0, 59);
+  },
+});
+
+function getFilteredStudents(students, min, max) {
+  return students
+    .filter(
+      (student) => student.averageGrade <= max && student.averageGrade >= min
+    )
+    .map((student) => student.name)
+    .join(', ');
+}
